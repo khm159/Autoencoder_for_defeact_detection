@@ -1,0 +1,9 @@
+config:
+  data:
+    path: './data/dataset.npy'
+    name: 'motor_db'
+  model:
+    name: 'UEDNet'
+    hidden_size: 128
+    lr : 0.0001
+    

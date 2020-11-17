@@ -1,0 +1,7 @@
+config:
+  data:
+    path: './data/dataset.npy'
+    name: 'motor_db'
+  parameter:
+    hidden_size: 
+  
