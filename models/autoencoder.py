@@ -3,9 +3,9 @@ import torch.optim as optim
 import torch
 import numpy as np
 
-class UEDNet(nn.Module):
+class autoencoder(nn.Module):
     def __init__(self, in_dim, hidden_size, lr):
-        print("  Building UEDNet")
+        print("  Building autoencoder network")
         super().__init__()
         self.in_dim = in_dim
         self.hidden_size = hidden_size
@@ -16,19 +16,17 @@ class UEDNet(nn.Module):
         self.encoder_output_layer = nn.Linear(
             in_features=self.hidden_size, out_features=int(self.hidden_size)
         )
-
-        #self.encoder_decoder_1dconv = nn.Conv1d(
-        #    in_channels=int(self.hidden_size/2), kernel_size=3, stride=1, padding=1, out_channels=int(self.hidden_size/2)
-        #)
         self.decoder_hidden_layer = nn.Linear(
             in_features=int(self.hidden_size), out_features=self.hidden_size
         )
         self.decoder_output_layer = nn.Linear(
             in_features=self.hidden_size, out_features=self.in_dim
         )
-
-        self.optimizer = optim.Adam(self.parameters(), lr = lr)
+        
+        self.optimizer = optim.Adam(self.parameters(), lr = self.lr)
+        self.scheduler = optim.lr_scheduler.ReduceLROnPlateau(self.optimizer, 'min')
         self.criterion = nn.L1Loss()
+
 
     def forward(self, features):
         features = features.cuda()

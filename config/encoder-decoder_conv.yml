@@ -1,3 +1,0 @@
-config:
-  data:
-    path: './data/dataset.npy'
