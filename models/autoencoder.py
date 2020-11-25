@@ -23,9 +23,11 @@ class autoencoder(nn.Module):
             in_features=self.hidden_size, out_features=self.in_dim
         )
         
-        self.optimizer = optim.Adam(self.parameters(), lr = self.lr)
+        #self.optimizer = optim.Adam(self.parameters(), lr = self.lr)
+        self.optimizer = optim.SGD(self.parameters(), lr = self.lr, momentum=0.9)
+        
         self.scheduler = optim.lr_scheduler.ReduceLROnPlateau(self.optimizer, 'min')
-        self.criterion = nn.L1Loss()
+        self.criterion = nn.MSELoss()
 
 
     def forward(self, features):

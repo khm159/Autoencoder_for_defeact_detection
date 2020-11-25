@@ -4,6 +4,6 @@ config:
     name: 'motor_db'
   model:
     name: 'autuencoder'
-    hidden_size: 256
-    lr : 0.01
+    hidden_size: 128
+    lr : 0.001
     

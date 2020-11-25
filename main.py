@@ -52,7 +52,7 @@ def main():
             loss.backward()
             model.optimizer.step()
             batch_loss +=loss.item()
-        out = "[epoch {}/{}]   ".format(epoch,epochs)+" training loss(L1) :{}".format(batch_loss,".3f")+" lr : "+str(model.lr)+"\n"
+        out = "[epoch {}/{}]   ".format(epoch,epochs)+" training loss(L1) :{}".format(batch_loss/batch_size,".3f")+" lr : "+str(model.lr)+"\n"
         print(out)
         log.write(out)
     
@@ -63,7 +63,7 @@ def main():
     losses = np.zeros([2871,])
     cursor = 0
     print('=> Testing Start...')
-    loss = torch.nn.L1Loss()
+    loss = torch.nn.MSELoss()
     for X,Y in tqdm(Loader.loader):
         
         with torch.no_grad():
