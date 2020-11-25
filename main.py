@@ -46,10 +46,9 @@ def main():
         batch_loss = 0.0
         for X,Y in tqdm(Loader.loader):
             X = X.cuda()
-            Y = Y.cuda()
             model.optimizer.zero_grad()
             y_pred = model(X).cuda()
-            loss = model.criterion(y_pred, Y).cuda()
+            loss = model.criterion(y_pred, X).cuda()
             loss.backward()
             model.optimizer.step()
             batch_loss +=loss.item()
